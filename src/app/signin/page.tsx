@@ -14,8 +14,6 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 import { useRouter } from 'next/navigation';
 import '../../utils/api/user';
 import { setToken } from '@/utils/helper';
@@ -65,12 +63,6 @@ export default function HomePage() {
     disableLogin: false,
   });
   const [showPassword, setShowPassword] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
-  React.useEffect(() => {
-    UserSVC.getUser('1').then((res) => {
-      console.log('profile res', res);
-    });
-  }, []);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -78,11 +70,6 @@ export default function HomePage() {
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
-  };
-  const handleClose = () => {
-    if (state.disableLogin) {
-      setOpen(false);
-    }
   };
 
   const handleChangeText =
@@ -217,13 +204,6 @@ export default function HomePage() {
         </Box>
       </Box>
       <Copyright sx={{ mt: 8, mb: 4 }} />
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
-        onClick={handleClose}
-      >
-        <CircularProgress color='inherit' />
-      </Backdrop>
     </Container>
   );
 }
